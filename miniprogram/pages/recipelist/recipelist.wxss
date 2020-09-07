@@ -1,0 +1,88 @@
+/* pages/recipelist/recipelist.wxss */
+
+.hot-recipe-lists {
+  margin-top: 10px;
+}
+
+/* 菜谱列表 */
+.hot-recipe-list {
+  width: 90%;
+  height: 270rpx;
+  margin: 15px 5%;
+  /* border: 1px solid #ccc; */
+  display: flex;
+}
+
+/* 菜谱图片 */
+.recipeimage{
+  width: 255rpx;
+  height: 255rpx;
+}
+.recipeimage image {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.tips {
+  text-align: center;
+  font-size: 13px;
+  /* margin: px  0px; */
+  color: #bbb;
+}
+
+
+.usernameimage {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.tjimage {
+  width: 20px;
+  height: 18px;
+}
+
+.hotimage {
+  width: 22px;
+  height: 22px;
+}
+
+
+.recipeinfo {
+  padding: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 菜谱名称 */
+.recipename text {
+  font-size: 17px;
+  font-weight: bolder
+}
+
+
+
+/* 发布菜谱的详细信息 */
+.recipedetail {
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recipedetail image {
+  margin-right: 5px;
+}
+
+.recipedetail text {
+  margin-right: 14rpx;
+  font-size: 24rpx;
+  color: #bbb;
+}
+
+.xingxing image {
+  width: 22px;
+  height: 22px;
+}

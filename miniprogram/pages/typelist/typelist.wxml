@@ -1,0 +1,31 @@
+<view class="page">
+  <!-- 还是最上面的搜索页面 -->
+  <view>
+    <image src='./index.jpg' class='img'></image>
+    <!-- bindtap="search" -->
+    <!-- 设置搜索栏 -->
+    <view class="search">
+      <view class="search_view">
+        <icon type="search"></icon>
+        <input placeholder="菜谱搜索"></input>
+      </view>
+      <text>搜索</text>
+    </view>
+  </view>
+
+  <!-- 所有的菜谱分类页面 -->
+  <view class="typelist">
+    <view class='hot-recipe'>
+      <!-- 所有分类的列表 -->
+      <mp-cells>
+        <mp-cell link hover value="儿童菜谱">
+        </mp-cell>
+        <mp-cell link hover value="孕妇菜谱">
+        </mp-cell>
+      </mp-cells>
+    </view>
+  </view>
+
+
+
+</view>

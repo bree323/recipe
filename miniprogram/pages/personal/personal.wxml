@@ -1,0 +1,105 @@
+<!-- 用户信息显示位置 -->
+	<view class='userInfo'>
+		<image src='/static/personal/background.jpg' class='userinfo_img'></image>
+		<view class='userinfo_info'>
+			<!-- 如果没有登录，显示未登录图片 -->
+			<block wx:if="{{ !false }}">
+				<image src='/static/personal/user.png'></image>
+				<!-- 显示登录按钮 -->
+				<button size='mini' class="btn-login">登录</button>
+			</block>
+			<!-- 登录之后显示的内容 -->
+			<block wx:else>
+				<!-- 点击头像，进行  {发布菜谱分类} （必须是管理员的情况） -->
+				<image src="https://wx.qlogo.cn/mmopen/vi_32/XKciakDDRBF5o3lXmHh1bBLNpgNBanGEib66Kic5ol3OXql3RuTx37MCibkKcibhQhtXSib0hYYFnO6Eb6LF1RH1TIyw/132" bindtap="fbcpfl"></image>
+				<text class="nickname">欢迎: 星期八</text>
+			</block>
+
+		</view>
+
+	</view>
+
+	<!-- 页面选项卡内容 -->
+	<!-- 选项卡选项 -->
+	<view class="topTabSwiper">
+		<view class="tab tabBorer">菜单</view>
+		<view class="tab">菜谱</view>
+		<view class="tab">关注</view>
+	</view>
+
+	<!-- 选项卡对应的内容 -->
+	<view class="content">
+		<!-- 未登录时显示的内容 -->
+		<view wx:if="{{ !true }}" style="text-align:center;margin-top:10px">
+			<image src="/static/personal/tips1.png" class="abcdef"></image>
+			<view style="font-size:14;color:#ccc">可以先去登录哦</view>
+		</view>
+
+		<!-- 已登录显示的内容 -->
+		<block wx:else>
+			<!-- 显示菜单列表 -->
+			<view id="recipeList" style="display:none;">
+				<view class='swiper_con'>
+					<!-- 菜单列表 -->
+					<scroll-view  style="height:180px" class="cdli" scroll-x="{{ true }}">
+						<view class="cdli_info" >
+							<!-- 图片 -->
+							<image src="/static/index/recipe.jpg"></image>
+							<!-- 文本 -->
+							<text>萝卜青菜</text>
+						</view>
+						<!-- 删除菜单列表 -->
+						<view class="delCdlb">
+							<!-- 删除菜单列表 -->
+							<view style="margin-top:76px;color:#fff;" bindtap="delCdlb" data-id="{{ item._id }}" data-index="{{ index }}">
+								删除
+							</view>
+						</view>
+					</scroll-view>
+					<!-- 点击添加按钮，显示选择菜谱分类，添加菜单，添加步骤 -->
+					<view class="cdli cdlitj" style="height:180px" bindtap="pbmenu">
+						<image src="/static/personal/add.png"></image>
+					</view>
+				</view>
+			</view>
+			<!-- 显示菜单分类列表（菜谱） -->
+			<view id="typeList" style="display:none;">
+				<view class='swiper_con1'>
+					<!-- 自己发布过的菜单对应的菜谱分类列表   -->
+					<view class="page">
+						<view class="page__bd">
+							<view class="weui-cells">
+
+								<mp-slideview buttons="{{[{type: 'warn',text: '查看',extClass: 'test'}]}}" >
+									<mp-cell value="儿童菜谱" footer="左划more"></mp-cell>
+
+								</mp-slideview>
+
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 显示关注菜单列表 -->
+			<view id="followRecipe">
+				<view class='swiper_con'>
+					<!-- 列出自己所有关注的菜单菜谱列表，然后通过点击能够调到对应的详情页面 -->
+					<view style="height:180px;margin-top:20px" class="cdli">
+						<view class="cdli_info" style="text-align:center">
+							<!-- 图片 -->
+							<image src="/static/index/recipe.jpg"></image>
+							<!-- 文本 -->
+							<text>萝卜青菜</text>
+
+						</view>
+
+					</view>
+					<view wx:if="{{ guanzhu.length <= 0 }}" style="text-align:center;margin-top:100px">
+						暂无关注哦
+					</view>
+				</view>
+			</view>
+
+		</block>
+
+	</view>

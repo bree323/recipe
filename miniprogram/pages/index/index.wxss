@@ -1,0 +1,148 @@
+/*  */
+page {
+  background: #fafaf8;
+}
+
+.bgImgae {
+  width: 100%;
+  height: 150px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+
+.search {
+  width: 100%;
+  height: 40px;
+  /* background: rgb(244,96,56); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 15px;
+}
+
+.search_view {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 70%;
+  height: 35px;
+  /* border: 1px solid  #ff0; */
+  border-radius: 20px;
+  background: #fff;
+}
+
+.search input {
+  width: 82%;
+  height: 38px;
+  /* border: 1px solid  #ccc; */
+}
+
+.search text {
+  color: #f00;
+  margin-left:10rpx;
+}
+
+/* 分类导航 */
+.sort-menu {
+  width: 100%;
+  height: 90px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.sort-menu image {
+  width: 30px;
+  height: 30px;
+}
+
+.sort-menu text {
+  font-size: 12px;
+}
+
+.sort-menu .menu-list {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 热门菜谱 */
+
+.hot-recipe {
+  background: #fff;
+}
+
+/* 热门菜谱列表大盒子 */
+.hot-recipe-lists {
+  padding: 5px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 热门菜谱列表 */
+.hotlist {
+  width: 48%;
+  height: 560rpx;
+  /* border: 1px solid red; */
+  border-radius: 10px;
+  float: left;
+  margin: 1%;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.recipeimage {
+  height: 370rpx;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.hotlist_info {
+  padding: 1px 10px;
+}
+
+.recipename {
+  font-size: 17px;
+  font-weight: bolder
+}
+
+.usernameimage {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.hotimage {
+  width: 22px;
+  height: 22px;
+}
+
+.dedailinfo {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dedailinfo view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dedailinfo text {
+  font-size: 15px;
+  color: #bbb;
+  margin-left: 3px;
+}

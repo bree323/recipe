@@ -1,0 +1,124 @@
+<!-- 顶部图片 -->
+<view class="bgImgae">
+	<image src='./index.jpg' class='img'></image>
+</view>
+<!-- 设置搜索栏 -->
+<view class="search">
+	<view class="search_view">
+		<icon type="search"></icon>
+		<input placeholder="菜谱搜索"></input>
+	</view>
+	<text>搜索</text>
+</view>
+<!-- 分类导航 -->
+<view class='sort-menu'>
+	<!-- 添加点击事件，跳到所有的菜谱分类页面 -->
+	<view class='menu-list'>
+		<image src='/static/index/fenlei.png'></image>
+		<text>菜谱分类</text>
+	</view>
+	<!-- 添加点击事件，跳到相应的菜单列表页面 -->
+	<view class='menu-list'>
+		<image src='/static/index/ertong.png'></image>
+		<text>儿童菜谱</text>
+	</view>
+	<view class='menu-list'>
+		<image src='/static/index/yangsheng.png'></image>
+		<text>养生菜谱</text>
+	</view>
+	<!-- 传入推荐 -->
+	<view class='menu-list'>
+		<image src='/static/index/tuijian.png'></image>
+		<text>推荐菜谱</text>
+	</view>
+</view>
+<!-- 热门菜谱 -->
+<view class='hot-recipe'>
+	<!-- moreHotRecipes更多的热门菜谱 -->
+	<mp-cell link hover value="热门菜谱">
+		<image slot="title" src="/static/index/remen.png" style="margin-right: 16px;vertical-align: middle;width:30px; height: 30px;"></image>
+	</mp-cell>
+</view>
+<!-- 热门菜谱列表 -->
+<view class="hot-recipe-lists">
+	<!-- 点击图片，跳转到当前菜单的菜谱详情页面 -->
+	<!-- id :菜单id， recipeName：菜单名称 -->
+	<view class="hotlist">
+		<view>
+			<image class="recipeimage" mode="scaleToFill" src="/static/index/recipe.jpg"></image>
+		</view>
+		<!-- 菜谱信息 -->
+		<view class="hotlist_info">
+			<!-- 菜谱名称 -->
+			<view class="recipename">
+				<text>萝卜青菜</text>
+			</view>
+			<!-- 详细信息 -->
+			<view class="dedailinfo">
+				<!-- 头像  名字 -->
+				<view>
+					<image class="usernameimage" mode="scaleToFill" src="https://wx.qlogo.cn/mmopen/vi_32/XKciakDDRBF5o3lXmHh1bBLNpgNBanGEib66Kic5ol3OXql3RuTx37MCibkKcibhQhtXSib0hYYFnO6Eb6LF1RH1TIyw/132"></image>
+					<text>星期八</text>
+				</view>
+				<!-- 热度 -->
+				<view>
+					<image class="hotimage" mode="scaleToFill" src="/static/index/hot.png"></image>
+					<text>30</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+  <view class="hotlist">
+		<view>
+			<image class="recipeimage" mode="scaleToFill" src="/static/index/recipe.jpg"></image>
+		</view>
+		<!-- 菜谱信息 -->
+		<view class="hotlist_info">
+			<!-- 菜谱名称 -->
+			<view class="recipename">
+				<text>萝卜青菜</text>
+			</view>
+			<!-- 详细信息 -->
+			<view class="dedailinfo">
+				<!-- 头像  名字 -->
+				<view>
+					<image class="usernameimage" mode="scaleToFill" src="https://wx.qlogo.cn/mmopen/vi_32/XKciakDDRBF5o3lXmHh1bBLNpgNBanGEib66Kic5ol3OXql3RuTx37MCibkKcibhQhtXSib0hYYFnO6Eb6LF1RH1TIyw/132"></image>
+					<text>星期八</text>
+				</view>
+				<!-- 热度 -->
+				<view>
+					<image class="hotimage" mode="scaleToFill" src="/static/index/hot.png"></image>
+					<text>30</text>
+				</view>
+			</view>
+		</view>
+	</view>
+  
+  <view class="hotlist">
+		<view>
+			<image class="recipeimage" mode="scaleToFill" src="/static/index/recipe.jpg"></image>
+		</view>
+		<!-- 菜谱信息 -->
+		<view class="hotlist_info">
+			<!-- 菜谱名称 -->
+			<view class="recipename">
+				<text>萝卜青菜</text>
+			</view>
+			<!-- 详细信息 -->
+			<view class="dedailinfo">
+				<!-- 头像  名字 -->
+				<view>
+					<image class="usernameimage" mode="scaleToFill" src="https://wx.qlogo.cn/mmopen/vi_32/XKciakDDRBF5o3lXmHh1bBLNpgNBanGEib66Kic5ol3OXql3RuTx37MCibkKcibhQhtXSib0hYYFnO6Eb6LF1RH1TIyw/132"></image>
+					<text>星期八</text>
+				</view>
+				<!-- 热度 -->
+				<view>
+					<image class="hotimage" mode="scaleToFill" src="/static/index/hot.png"></image>
+					<text>30</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+</view>

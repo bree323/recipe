@@ -1,0 +1,52 @@
+ <!-- 判断是否有菜谱 -->
+ <!-- 有菜谱时显示的内容 -->
+ <view class="hot-recipe-lists">
+ 	<!-- 菜谱列表 -->
+ 	<view class='hot-recipe-list'>
+ 		<!-- 菜谱图片 -->
+ 		<view class="recipeimage">
+ 			<image src="/static/index/recipe.jpg"></image>
+ 		</view>
+ 		<!-- 菜谱信息 -->
+ 		<view class="recipeinfo">
+ 			<!-- 菜谱名称 -->
+ 			<view class="recipename">
+ 				<text>萝卜青菜</text>
+ 			</view>
+ 			<view class="recipefooter">
+ 				<!-- 几星图片 ， 推荐度（关注度） / 3 来做 -->
+ 				<view class="xingxing">
+ 					<!-- 关注不足3个，没有星星  {{ item.tjcp/3 < 1 }}-->
+					 
+					<!-- 关注大于3个，小于6个，1个星星  {{ item.tjcp/3 >= 1 && item.tjcp/3 < 2 }}-->
+					<!-- 以此类推，小星星 {{ item.tjcp/3 >= 2 && item.tjcp/3 < 3 }} -->
+ 					<block>
+ 						<image wx:for="{{ [1,2] }}" src="/static/index/xingxing1.png"></image>
+ 					</block>
+ 					<block>
+ 						<image wx:for="{{ [1,2,3] }}" src="/static/index/xingxing0.png"></image>
+ 					</block>
+
+ 				</view>
+ 				<!-- 菜谱发布人信息 -->
+ 				<view class="recipedetail">
+ 					<image class="usernameimage" src="https://wx.qlogo.cn/mmopen/vi_32/XKciakDDRBF5o3lXmHh1bBLNpgNBanGEib66Kic5ol3OXql3RuTx37MCibkKcibhQhtXSib0hYYFnO6Eb6LF1RH1TIyw/132"></image>
+ 					<text>星期八</text>
+ 					<image class="tjimage" src="/static/index/tj.png"></image>
+ 					<text>5</text>
+ 					<image class="hotimage" src="/static/index/hot.png"></image>
+ 					<text>30222222</text>
+ 				</view>
+ 			</view>
+
+ 		</view>
+ 	</view>
+ </view>
+ <!-- 没有菜谱时显示的内容 -->
+ <view class="tips">
+ 	暂时还没有朋友发布菜谱哦！！！
+ </view>
+ <!-- 滚动获取数据时，数据不够的情况 -->
+ <view class="tips">
+ 	已经没有数据啦！！！
+ </view>
