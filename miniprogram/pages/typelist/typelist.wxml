@@ -7,25 +7,23 @@
     <view class="search">
       <view class="search_view">
         <icon type="search"></icon>
-        <input placeholder="菜谱搜索"></input>
+        <input placeholder="菜谱搜索" placeholder="菜谱搜索" value="{{iptVal}}" bindinput="_iptVal"></input>
       </view>
-      <text>搜索</text>
+      <text bindtap="_goRecipelistPageFromSearch" 
+      data-tag="search" data-title="{{ iptVal }}"  data-id="null">搜索</text>
     </view>
   </view>
 
   <!-- 所有的菜谱分类页面 -->
   <view class="typelist">
     <view class='hot-recipe'>
-      <!-- 所有分类的列表 -->
+      <!-- 所有普通分类的列表 -->
       <mp-cells>
-        <mp-cell link hover value="儿童菜谱">
-        </mp-cell>
-        <mp-cell link hover value="孕妇菜谱">
-        </mp-cell>
+        <block wx:for="{{recipes}}" >
+          <mp-cell link hover wx:key="*this" data-tag="ptfl" data-title="{{item.menuTypeName}}" data-index="{{index}}" value="{{item.menuTypeName}}"  bindtap="_goRecipelistPage"></mp-cell>
+        </block>
       </mp-cells>
     </view>
   </view>
-
-
 
 </view>

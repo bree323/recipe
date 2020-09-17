@@ -1,24 +1,28 @@
+<!-- 后台菜谱管理 -->
 <view class='adminPerson'>
 	<!-- 菜谱分类列表 (菜谱分类列表) -->
 	<view class='cpfllb'>
-		<view>
-			<text class="txt">儿童菜谱</text>
-			<text class="btn" style="background:#f1613c">删除</text>
-			<text class="btn" style="background:#4578ff">修改</text>
+		<view wx:for="{{typeNameValList}}" wx:key="index">
+			<text class="txt">{{item.menuTypeName}}</text>
+			<text class="btn" style="background:#f1613c" bindtap="_menuTypeListDel" data-menuTypeName="{{item.menuTypeName}}" id="{{item._id}}">删除</text>
+
+			<text class="btn" style="background:#4578ff" data-menuTypeName="{{item.menuTypeName}}" bindtap="_doMenuTypeListUpdate">修改</text>
 		</view>
 		<!-- 添加按钮 -->
-		<view class="fladd">
+		<!-- <view class="fladd">
 			<image src="/static/personal/add.png"></image>
+		</view> -->
+		<view class="cdli cdlitj fladd" style="height:180px" bindtap="pbmenu" bindtap="_goRecipePage">
+					<image src="/static/personal/add.png"></image>
 		</view>
 
 	</view>
 	<!--    页面 （菜谱添加分类） -->
 	<view class='cptjfl'>
-
 		<mp-cell prop="mobile" ext-class=" weui-cell_vcode">
 			<!-- 输入菜谱分类 -->
-			<input class="weui-input" placeholder="输入菜谱分类" />
-			<view slot="footer" class="weui-vcode-btn">添加</view>
+			<input class="weui-input" value="{{typeNameVal}}" bindinput="_menuTypeListAddVal" placeholder="输入菜谱分类" />
+			<view slot="footer" class="weui-vcode-btn" bindtap="_menuTypeListAdd" >添加</view>
 		</mp-cell>
 	</view>
 	<!-- 修改页面  （菜谱修改分类）-->
@@ -26,8 +30,8 @@
 
 		<mp-cell prop="mobile" ext-class=" weui-cell_vcode">
 			<!-- 输入菜谱分类 -->
-			<input value="" class="weui-input" placeholder="输入菜谱分类" />
-			<view slot="footer" class="weui-vcode-btn">修改</view>
+			<input value="" class="weui-input" value="{{menutypename}}" bindinput="_menuTypeListUpdateIpt" placeholder="输入菜谱分类" />
+			<view slot="footer" class="weui-vcode-btn"  bindtap="_menuTypeListUpdate">修改</view>
 		</mp-cell>
 
 	</view>

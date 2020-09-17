@@ -20,6 +20,22 @@
   font-size: 15px;
   color: #aaa;
 }
+/* 收藏数据展示定位 */
+.container_info_recipedetail{
+  /* position: relative; */
+  display: flex;
+}
+.container_info_recipedetail #totalFollows{
+  /* display:inline-block; */
+  width: 12px;
+  /* position: absolute; */
+  /* top: 3px; */
+  color: #aaa;
+}
+.container_info_recipedetail #sc{
+  position: relative;
+  top: -24px;
+}
 /* 中间灰色分割线 */
 .fgx{
   width: 94%;

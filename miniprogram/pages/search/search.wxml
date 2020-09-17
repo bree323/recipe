@@ -3,9 +3,9 @@
   <view class="search">
     <view class="search_view">
       <icon type="search"></icon>
-      <input></input>
+      <input  placeholder="菜谱搜索" value="{{iptVal}}" bindinput="_iptVal"></input>
     </view>
-    <text>搜索</text>
+    <text bindtap="_goRecipelistPage" data-tag="search" data-title="{{ iptVal }}"  data-id="null">搜索</text>
   </view>
   <!-- 热门搜索  9个即可 -->
   <view class="hotsearch">
@@ -14,26 +14,29 @@
     </view>
     <view class="hotsearch_list">
       <!-- 列表 -->
-      <view>萝卜青菜</view>
-      <view>萝卜青菜</view>
+      <block wx:if="{{hotSearch.length > 0}}">
+        <view wx:for="{{hotSearch}}" wx:key="item._id" bindtap="_gorecipeDetailPage" 
+        data-id="{{item._id}}" data-recipename="{{item.recipeName}}"
+			>{{item.recipeName}}</view>
+      </block>
+      <view wx:else>暂无记录</view>
     </view>
   </view>
+  
   <!-- 近期搜索  存入缓存 -->
   <view class="jqsearch">
     <view class="jqsearch_title">
+
       <text>近期搜索</text>
     </view>
     <view class="jqsearch_list">
       <!-- 列表 -->
-      <block>
-        <view>萝卜青菜</view>
-        <view>萝卜青菜</view>
+      <block wx:if="{{lastSearch.length > 0}}">
+        <view wx:for="{{lastSearch}}" wx:key="index" bindtap="_goRecipelistPage" 
+        data-tag="search" data-title="{{ item }}"  data-id="null"
+			>{{item}}</view>
       </block>
-      <block>
-        <view>
-          暂无记录
-        </view>
-      </block>
+      <view wx:else>暂无记录</view>
 
     </view>
   </view>
