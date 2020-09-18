@@ -32,10 +32,7 @@
   /* top: 3px; */
   color: #aaa;
 }
-.container_info_recipedetail #sc{
-  position: relative;
-  top: -24px;
-}
+
 /* 中间灰色分割线 */
 .fgx{
   width: 94%;

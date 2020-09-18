@@ -8,7 +8,7 @@
 		<icon type="search"></icon>
 		<input placeholder="菜谱搜索" value="{{iptVal}}" bindinput="_iptVal"></input>
 	</view>
-	<text bindtap="_goRecipelistPage" data-tag="search" data-title="{{ iptVal }}"  data-id="null">搜索</text>
+	<text bindtap="_goRecipelistPage" data-tag="search" data-title="{{ iptVal }}" data-id="null">搜索</text>
 </view>
 <!-- 分类导航 -->
 <view class='sort-menu'>
@@ -18,17 +18,15 @@
 		<text>菜谱分类</text>
 	</view>
 	<!-- 添加点击事件，跳到相应的菜单列表页面 -->
-	<block wx:for="{{recipesMax2}}"  wx:key="*this">
-		<view class='menu-list' data-tag="ptfl"
-		data-title="{{item.menuTypeName}}" data-index="{{index}}" value="{{item.menuTypeName}}"  bindtap="_goRecipelistPage1">
+	<block wx:for="{{recipesMax2}}" wx:key="*this">
+		<view class='menu-list' data-tag="ptfl" data-title="{{item.menuTypeName}}" data-index="{{index}}"
+			value="{{item.menuTypeName}}" bindtap="_goRecipelistPage1">
 			<image src='/static/index/ertong.png'></image>
 			<text>{{item.menuTypeName}}</text>
 		</view>
 	</block>
 	<!-- 传入推荐     需求不清，按热门推荐写的-->
-	<view class='menu-list' 
-	bindtap="_goRecipelistPage"  
-	data-tag="rmcp" data-title="热门菜谱"  data-id="null">
+	<view class='menu-list' bindtap="_goRecipelistPage" data-tag="rmcp" data-title="热门菜谱" data-id="null">
 		<image src='/static/index/tuijian.png'></image>
 		<text>推荐菜谱</text>
 	</view>
@@ -36,44 +34,79 @@
 <!-- 热门菜谱 -->
 <view class='hot-recipe'>
 	<!-- moreHotRecipes更多的热门菜谱 -->
-	<mp-cell link hover value="热门菜谱" bindtap="_goRecipelistPage"  
-	data-tag="rmcp" data-title="热门菜谱"  data-id="null">
+	<mp-cell link hover value="热门菜谱" bindtap="_goRecipelistPage" data-tag="rmcp" data-title="热门菜谱" data-id="null">
 		<image slot="title" src="/static/index/remen.png"
 			style="margin-right: 16px;vertical-align: middle;width:30px; height: 30px;"></image>
 	</mp-cell>
 </view>
 <!-- 热门菜谱列表 -->
-<view class="hot-recipe-lists">
+<view class="hot-recipe-lists waterfall_box">
 	<!-- 点击图片，跳转到当前菜单的菜谱详情页面 -->
 	<!-- id :菜单id， recipeName：菜单名称 -->
-	<block wx:for="{{pbRecipeLists}}" wx:key="*this">
-		<view class="hotlist" 
-		  bindtap="_gorecipeDetailPage" data-id="{{item._id}}" 
-			data-recipename="{{item.recipeName}}">
-			<view>
-				<image class="recipeimage" mode="scaleToFill" src="{{item.fields[0].fileID}}"></image>
-			</view>
-			<!-- 菜谱信息 -->
-			<view class="hotlist_info">
-				<!-- 菜谱名称 -->
-				<view class="recipename">
-					<text>{{item.recipeName}}</text>
-				</view>
-				<!-- 详细信息 -->
-				<view class="dedailinfo">
-					<!--发布者用户  头像  名字 -->
+	<view class="column">
+		<block wx:for="{{pbRecipeLists}}" wx:key="*this">
+			<view wx:if="{{index%2==0}}" class="waterfall_item_even">
+				<view class="hotlist waterfall_item" bindtap="_gorecipeDetailPage" data-id="{{item._id}}"
+					data-recipename="{{item.recipeName}}">
 					<view>
-						<image class="usernameimage" mode="scaleToFill" src="{{pbUsers[index].avatarUrl}}">
-						</image>
-						<text>{{pbUsers[index].nickName}}</text>
+						<image class="recipeimage" mode="scaleToFill" src="{{item.fields[0].fileID}}"></image>
 					</view>
-					<!-- 热度 -->
-					<view>
-						<image class="hotimage" mode="scaleToFill" src="/static/index/hot.png"></image>
-						<text>{{item.views}}</text>
+					<!-- 菜谱信息 -->
+					<view class="hotlist_info">
+						<!-- 菜谱名称 -->
+						<view class="recipename">
+							<text>{{item.recipeName}}</text>
+						</view>
+						<!-- 详细信息 -->
+						<view class="dedailinfo">
+							<!--发布者用户  头像  名字 -->
+							<view>
+								<image class="usernameimage" mode="scaleToFill" src="{{pbUsers[index].avatarUrl}}">
+								</image>
+								<text>{{pbUsers[index].nickName}}</text>
+							</view>
+							<!-- 热度 -->
+							<view>
+								<image class="hotimage" mode="scaleToFill" src="/static/index/hot.png"></image>
+								<text>{{item.views}}</text>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
-		</view>
-	</block>
+		</block>
+	</view>
+	<view class="column">
+		<block wx:for="{{pbRecipeLists}}" wx:key="*this">
+			<view wx:if="{{index%2==1}}" class="waterfall_item_odd">
+				<view class="hotlist waterfall_item" bindtap="_gorecipeDetailPage" data-id="{{item._id}}"
+					data-recipename="{{item.recipeName}}">
+					<view>
+						<image class="recipeimage" mode="scaleToFill" src="{{item.fields[0].fileID}}"></image>
+					</view>
+					<!-- 菜谱信息 -->
+					<view class="hotlist_info">
+						<!-- 菜谱名称 -->
+						<view class="recipename">
+							<text>{{item.recipeName}}</text>
+						</view>
+						<!-- 详细信息 -->
+						<view class="dedailinfo">
+							<!--发布者用户  头像  名字 -->
+							<view>
+								<image class="usernameimage" mode="scaleToFill" src="{{pbUsers[index].avatarUrl}}">
+								</image>
+								<text>{{pbUsers[index].nickName}}</text>
+							</view>
+							<!-- 热度 -->
+							<view>
+								<image class="hotimage" mode="scaleToFill" src="/static/index/hot.png"></image>
+								<text>{{item.views}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
 </view>

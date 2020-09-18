@@ -8,7 +8,9 @@ Page({
    */
   data: {
     recipesListInfo: [], // 对应菜谱列表的菜单信息
-    pbUsersInfo: [] // 发布者的用户信息
+    pbUsersInfo: [],// 发布者的用户信息
+    page:1,     // 默认显示页
+    maxPage: 0     //  最大页数。。所有数据已请求完成
   },
   // 页面加载时   1、设置对应标题     2、判断进入那个菜谱页面     3、相应页面进行数据请求
   async _whichTypelist(tag, id, title) {
@@ -16,11 +18,14 @@ Page({
      tag： 菜谱对应的标识
      recipeTypeId：点击菜谱对应的recipeTypeId   通过它去c-recipes表中找发布的菜单 */
     //  设置菜单列表头部标题
-    console.log({
+    /* console.log({
       tag,
       id,
       title
-    })
+    }) */
+    this.data.tag = tag
+    this.data.id = id
+    this.data.title = title
     wx.setNavigationBarTitle({
       title: title,
     })
@@ -31,8 +36,7 @@ Page({
       orderBy = {},
       limit = 5,
       page = this.data.page
-
-
+    
     // 进行判断，当前菜单页面是由哪个页面跳转而来
     switch (tag) {
       case 'ptfl': // 普通分类
@@ -57,7 +61,7 @@ Page({
         }
         break
       case 'tjcp': // 推荐菜谱
-        console.log(tag)
+        // console.log(tag)
         break
       case 'search': // 搜索菜谱
         // 根据title进行搜索菜单
@@ -75,15 +79,24 @@ Page({
         }
         break
       default:
-        console.log("出错啦")
+        // console.log("出错啦")
         break
     }
     // 链接数据库，进行数据请求。
     let res = await Api.findByWhere(Config.tables.recipeTable, where, limit, page, orderBy)
-    console.log('链接数据库，进行数据请求', res)
+    // console.log('链接数据库，进行数据请求', res)
+    // console.log({page,res})
+    if(res.data.length >= 1) {
+      // 页数加一
+      this.data.page++
+    } else {
+      this.setData({
+        maxPage: this.data.page
+      })
+    }
     if (res.length <= 0) return // 菜单列表为空时，结束函数
 
-    let recipesListInfo = res.data
+    let recipesListInfo = res.data.concat(this.data.recipesListInfo)
     //   console.log("菜单列表", recipesListInfo)
     let openidList = [] //搜集发布信息的用户的_openid  用于请求对应的用户信息
     recipesListInfo.forEach(item => {
@@ -105,6 +118,7 @@ Page({
     //  根据_openid去找对应的发布者的信息
     this._getPbUsers(openidList)
     // console.log('recipesListInfo', recipesListInfo)
+   
     this.setData({
       recipesListInfo
     })
@@ -158,7 +172,7 @@ Page({
    * 
    */
   onLoad: function (options) {
-    console.log('options', options)
+    // console.log('options', options)
     // 接参 由typelist页面点击对应的菜谱进入的对应的页面参数   
     let {
       title,
@@ -168,53 +182,13 @@ Page({
     // console.log({title, index, recipeTypeId})
     this._whichTypelist(tag, id, title)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onReachBottom(){
+    console.log('加载数据-----------')
+    // 继续调用获取菜谱方法
+    if(this.data.page!=this.data.maxPage) {
+      this._whichTypelist(this.data.tag,this.data.id,this.data.title)
+    }
+    
   }
+
 })

@@ -12,7 +12,6 @@ Page({
     recipeDetailInfo: {}, // 菜谱详情
     isFollows: false, // 当前用户，是否关注当前菜谱 ，默认未关注
     totalFollows: 0,  // 总关注数
-    followNum : 0, // 用户点击关注，通过监听
   },
 
   /**
@@ -28,27 +27,8 @@ Page({
       title: recipeName,
     })
     this.data.id = id //不渲染，只赋值，不设置值
-  // 开启监听
-  //  console.log('watch',watch)
-    watch.setWatcher(this)
   },
-  watch: {
-    followNum: function(newVal, oldVal) {
-      // console.log('???????????',newVal, oldVal);
-      if(newVal !== oldVal) {
-        this.data.totalFollows += newVal
-        this.setData({
-          totalFollows:this.data.totalFollows
-        })
-      }
-    }
-  },
-  watchFollows() {
-    this.data.totalFollows += this.data.followNum
-    this.setData({
-      totalFollows:this.data.totalFollows
-    })
-  },
+
   // 获取菜谱详情的方法
   async _getRecipeDetail() {
     let _id = this.data.id; //获取条件id
@@ -71,7 +51,8 @@ Page({
     let updateViews = await Api.updateById(Config.tables.recipeTable, _id, {
       views: _.inc(1)
     })
-    // 操作当前视图
+
+    // 操作当前登录用户视图
     result.data.views++;
     // 判断一下，当前菜谱，当前用户是否关注了  根据用户的_openid到关注表中查询
     // 查询followTable 
@@ -79,14 +60,16 @@ Page({
       _openid: wx.getStorageSync('_openid'), //自己的openid
       recipeID: _id // 当前菜单id
     }
+     if(!where._openid) return   //用户未登录则终止
     let followResult = await Api.findByWhere(Config.tables.followTable, where)
-    console.log('关注度', followResult)
+    // console.log('当前用户是否关注当前菜单', followResult)
     this.setData({
       recipe: result.data,
       // 反之，没有关注
       isFollows: followResult.data.length > 0 ? true : false
     })
   },
+
 
   // 处理关注操作和取消关注操作
   /* 需求
@@ -117,9 +100,13 @@ Page({
     //  if(bool) {console.log("??")}
     if (this.data.isFollows) { // 当前是关注状态
       //  console.log('????????????')
-     let followNum = -1
+     /* let followNum = -1
      this.setData({
       followNum
+     }) */
+     let totalFollows = this.data.totalFollows - 1
+     this.setData({
+      totalFollows
      })
       //取消关注
       // 删除follows表中的对应的数据
@@ -160,9 +147,13 @@ Page({
       })
     } else {
       // 进行关注
-      let followNum = 1
+      /* let followNum = 1
      this.setData({
       followNum
+     }) */
+     let totalFollows = this.data.totalFollows + 1
+     this.setData({
+      totalFollows
      })
       // recipeID
       // 插入follow表

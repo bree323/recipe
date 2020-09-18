@@ -43,7 +43,7 @@ page {
 
 .search text {
   color: #f00;
-  margin-left:10rpx;
+  margin-left: 10rpx;
 }
 
 /* 分类导航 */
@@ -84,15 +84,14 @@ page {
 /* 热门菜谱列表大盒子 */
 .hot-recipe-lists {
   padding: 5px 0px;
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
 }
 
 /* 热门菜谱列表 */
 .hotlist {
   width: 48%;
   height: 560rpx;
-  /* border: 1px solid red; */
   border-radius: 10px;
   float: left;
   margin: 1%;
@@ -145,4 +144,30 @@ page {
   font-size: 15px;
   color: #bbb;
   margin-left: 3px;
+}
+
+/* 列表瀑布流式布局 */
+.waterfall_box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+.waterfall_item {
+  margin: 10px;
+  width: calc(210%/2);
+}
+.column{
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+  margin: 10px;
+}
+.waterfall_item_even  {
+  height: 560rpx;
+  margin-bottom: 20px
+}
+.waterfall_item_odd{
+  height: 580rpx;
+  /* margin-bottom: 10px */
 }

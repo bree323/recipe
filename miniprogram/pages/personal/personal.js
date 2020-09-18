@@ -37,12 +37,12 @@ Page({
           // console.log(res, "云函数执行成功了")
           let _openid = res.result.openid; //获取用户唯一标识openid
 
-          // 4.查询当前用户是否在用户表中，如果在，直接什么都不做
+          // 4.查询当前用户是否在用户表中，如果在，则不需添加到用户表中
           let allUsers = await Api.findAll(Config.tables.usersTable, {
             _openid
           })
           // console.log(allUsers,"获取所有的用户")
-          // 用户首次登录
+          // 用户首次登录 
           if (allUsers.data.length <= 0) {
             // 首次登录的用户添加用户信息
             Api.add(Config.tables.usersTable, {
@@ -229,6 +229,19 @@ Page({
             wx.showToast({
               title: '再见吧再见吧',
             })
+            // 删除对应的关注者
+            let where = {
+              _openid: wx.getStorageSync('_openid'), //自己的openid
+              recipeID: id
+            }
+            wx.cloud.callFunction({  // 调用云函数删除云端数据库followTable表中对应的关注者信息
+              name: "remove",
+              data: {
+                table: Config.tables.followTable,
+                where,
+              },
+              
+            })
           }
         }
       },
@@ -300,6 +313,7 @@ Page({
   let followsRecipeList = []
   let res  = await Promise.all(followsRecipePromiseList)
    res.forEach(item => {
+     if(!item.data[0]) return
     followsRecipeList.push(item.data[0])
    })
     this.setData({

@@ -18,13 +18,9 @@
     </view>
     <view class="container_info_recipedetail">
       <text>by {{recipeDetailInfo.userInfo.nickName}}</text>
-      <input type="text" value="{{totalFollows}}" disabled id="totalFollows"
-      bindinput="watchFollows"/>
-      <text id="sc">
-        <!-- {{recipeDetailInfo.follows}} -->
-      人收藏
-      </text>
-      
+      <!-- <input type="text" value="{{totalFollows}}" disabled id="totalFollows"
+      bindinput="watchFollows"/> -->
+      <text>{{totalFollows}}人收藏</text>
       <text>{{recipeDetailInfo.views}}次浏览</text>
     </view>
   </view>

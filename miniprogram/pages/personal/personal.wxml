@@ -48,25 +48,30 @@
 		<view id="recipeList" wx:if="{{acctiveIndex === '0' ? true : false}}">
 			<view class='swiper_con'>
 				<!-- 菜单列表 -->
-				<block wx:for="{{selfRecipeLists}}" wx:key="*this">
-					<scroll-view style="height:180px" class="cdli" scroll-x="{{ true }}">
-						<view class="cdli_info" bindtap="_gorecipeDetailPage" data-id="{{item._id}}"
-							data-recipename="{{item.recipeName}}">
-							<!-- 图片 -->
-							<image src="{{item.fields[0].fileID}}"></image>
-							<!-- 文本 -->
-							<text>{{item.recipeName}}</text>
-						</view>
-						<!-- 删除菜单列表 -->
-						<view class="delCdlb">
-							<!-- 删除菜单列表 -->
-							<view style="margin-top:76px;color:#fff;" bindtap="_removeSelfRecipes" data-id="{{ item._id }}"
-								data-index="{{ index }}">
-								删除
+				<block wx:if="{{selfRecipeLists.length >= 1}}">
+					<block wx:for="{{selfRecipeLists}}" wx:key="*this">
+						<scroll-view style="height:180px" class="cdli" scroll-x="{{ true }}">
+							<view class="cdli_info" bindtap="_gorecipeDetailPage" data-id="{{item._id}}"
+								data-recipename="{{item.recipeName}}">
+								<!-- 图片 -->
+								<image src="{{item.fields[0].fileID}}"></image>
+								<!-- 文本 -->
+								<text>{{item.recipeName}}</text>
 							</view>
-						</view>
-					</scroll-view>
+							<!-- 删除菜单列表 -->
+							<view class="delCdlb">
+								<!-- 删除菜单列表 -->
+								<view style="margin-top:76px;color:#fff;" bindtap="_removeSelfRecipes" data-id="{{ item._id }}"
+									data-index="{{ index }}">
+									删除
+								</view>
+							</view>
+						</scroll-view>
+					</block>
 				</block>
+				<view wx:else style="text-align:center;margin-top:100px">
+						暂无关注哦
+					</view>
 				<!-- 点击添加按钮，显示选择菜谱分类，添加菜单，添加步骤 -->
 				<!-- <view class="cdli cdlitj" style="height:180px" bindtap="pbmenu" bindtap="_goRecipePage">
 					<image src="/static/personal/add.png"></image>
@@ -78,16 +83,18 @@
 			<view class='swiper_con1'>
 				<!-- 自己发布过的菜单对应的菜谱分类列表   -->
 				<view class="page">
-					<view class="page__bd">
+					<view class="page__bd" wx:if="{{selfRecipeList.length >= 1}}">
 						<block wx:for="{{selfRecipeList}}" wx:key="{{index}}">
 							<view class="weui-cells">
-								<mp-slideview buttons="{{[{type: 'warn',text: '查看',extClass: 'test'}]}}"
-								data-tag="ptfl" data-id="{{item._id}}" data-title="{{item.menuTypeName}}"   bindtap="_goRecipelistPage"
-								>
+								<mp-slideview buttons="{{[{type: 'warn',text: '查看',extClass: 'test'}]}}" data-tag="ptfl"
+									data-id="{{item._id}}" data-title="{{item.menuTypeName}}" bindtap="_goRecipelistPage">
 									<mp-cell value="{{item.menuTypeName}}" footer="左划more"></mp-cell>
 								</mp-slideview>
 							</view>
 						</block>
+					</view>
+					<view wx:else style="text-align:center;margin-top:100px">
+						暂无关注哦
 					</view>
 				</view>
 			</view>

@@ -14,6 +14,9 @@ Page({
     menutypename_id: '', // 修改的标识
     menutypename: '' // 修改时，修改框显示
   },
+  onShow() {
+  this._menuTypeList()
+  },
   // 请求menuTypeList
   async _menuTypeList() {
     let res = await Api.findAll(Config.tables.menuTypeList)
@@ -111,7 +114,6 @@ Page({
         }
       }
     })
-   
   },
 
    // 跳转到发布菜谱页面

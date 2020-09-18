@@ -77,7 +77,7 @@
 
 ### 4、onShow与onLoad
 
-1. onShow阶段请求的数据需要在页面切换之间频繁请求，onLoad阶段请求的数据只在加载时请求，页面间的切换不会导致重复请求，所以在搜索页面进行请求热门搜索和近期搜索时是在onshow阶段进行的，因为其它页面也会留下搜索记录，改变搜索的数据状态
+1. onShow阶段请求的数据需要在页面切换之间频繁请求，onLoad阶段请求的数据只在加载时请求，页面间的切换不会导致重复请求，所以在搜索页面进行请求热门搜索和近期搜索时是在onshow阶段进行的，因为其它页面也可能会留下搜索记录，改变搜索的数据状态
 
 ## 二、技术实现方面
 
@@ -153,11 +153,12 @@
       })
       console.log('this.data.followsRecipeList',this.data.followsRecipeList)
     },
+    
       
      虽然followsRecipeList最终都请求回来了，但并不能渲染到页面上 
       
-  ```
-
+```
+  
   
 
 ### 2、关于switch语句的使用
@@ -205,20 +206,36 @@ const db = wx.cloud.database()   // api.js
 
 
 
-### 4、调用云函数对数据库进行删除操作
+### 4、删除操作
+
+删除需求分析：删除操作是一个非常严谨的操作，有的删除操作我们并不希望他从直接将数据删除，而是通过改变他的状态来决定它是否**‘被删除’**，比如用户删除了自己发布的一个食谱，则是改变这个菜谱的status属性来决定后续的其它接口查询这个食谱是能否被查询到。
+
+而另一种删除操作则是从根本上删除，比如用户的关注状态，这个情况下就没必要去保留用户的关注历史状态。
+
+小程序删除文档地址：https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/remove.html
+
+###### 删除一条记录
+
+对记录使用 `remove` 方法可以删除该条记录
+
+###### 删除多条记录
+
+如果需要更新多个数据，需在 Server 端进行操作（云函数）。可通过 `where` 语句选取多条记录执行删除，只有有权限删除的记录会被删除。
+
+下面是取消关注操作，对关注表进行删除操作的实例：
 
 1. 云函数的创建
 
 - 创建后需对云函数进行更新
 
   ```
-  云函数.index.js
+  remove.index.js       =====>创建的云函数
   
   // 云函数入口文件
   const cloud = require('wx-server-sdk')
   
   cloud.init({
-    env:"zoe-s3ybc"
+    env:"zoe-s3ybc"   
   })
   let  db = cloud.database({
     env:"zoe-s3ybc" //单独指定数据的环境id
@@ -232,6 +249,7 @@ const db = wx.cloud.database()   // api.js
 2. 云函数的调用
 
 ```
+ 
  wx.cloud.callFunction({  // 调用云函数删除云端数据库followTable表中对应的关注者信息
         name: "remove",
         data: {
@@ -276,6 +294,7 @@ const db = wx.cloud.database()   // api.js
       // new set() 数组去重，返回的不是一个真正的数组
       // Array.from()  转换为真正的数组
       let newTypeIds = Array.from(new Set(typeI) ;
+      
 ```
 
 
@@ -294,10 +313,10 @@ const db = wx.cloud.database()   // api.js
 //以下情况input不能显示，在wxml中却能到对应的元素
 
 <text>
-        <!-- {{recipeDetailInfo.follows}} -->
-        <input type="text" value="{{totalFollows}}" disabled 
-      style="display:inline-block;position: relative;top: 3px;" 
-      bindinput="watchFollows"/>
+        <input type="text" 
+        	value="{{totalFollows}}" disabled
+      		bindinput="watchFollows"
+      	/>
       人收藏
   </text>
 ```
@@ -316,7 +335,24 @@ const db = wx.cloud.database()   // api.js
 
 ## 四、其它易忽略问题
 
-1. 对于菜单列表中项目的删除，不是对数据库进行删除操作，而是通过改该项目在数据库中的状态来决定是否能被接口请求，所以接口请求时需带上这个状态作为查询条件进行查询，这一点忽略会导致将用户已删除的项目也请求回来
+1. 对于菜单列表中item的删除，不是对数据库进行删除操作，而是通过改变item在数据库中的状态status来作为接口请求的一个条件，这一点忽略会导致将用户已删除的item也请求回来
+
+   
+
+2. 数据的叠加，首先要明确是什么数据类型的叠加，如果是数组，那么不能使用加法进行运算，应该使用数组的concat方法进行组合
+
+```
+菜单列表中，进行了分页请求数据，后一页的数据要在前一页的数据基础上进行累加计算
+let recipesListInfo = res.data.concat(this.data.recipesListInfo)
+```
+
+3. 
+
+
+
+
+
+
 
 
 
